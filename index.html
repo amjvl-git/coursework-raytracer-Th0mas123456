@@ -38,11 +38,13 @@ class Vec3
 
     // Scale this vector by the number scalar and return the result
     scale(scalar){
-        return new Vec3()
+        return new Vec3(this.x * scalar, this.y * scalar, this.z * scalar)
     }
     
     // Calculate the dot product of this vector with the other and return the result
-    dot(other) {}
+    dot(other){
+        
+    }
 
     // Calculate and return the magnitude of this vector
     magnitude() {}
