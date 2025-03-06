@@ -43,22 +43,24 @@ class Vec3
     
     // Calculate the dot product of this vector with the other and return the result
     dot(other){
-        
+        return new Vec3(this.x * other.x + this.y * other.y + this.z * other.z);
     }
 
     // Calculate and return the magnitude of this vector
     magnitude() {
-        return new Vec3(Math.sqrt( (this.x * this.x) + (this.y * this.y) + (this.z * this.z)))
+        return new Vec3(Math.sqrt( (this.x * this.x) + (this.y * this.y) + (this.z * this.z)));
     }
     
     // Calculate and return the magnitude of this vector without the square root
     magnitudeSquared(){
-        return new Vec3(magnitude() * magnitude())
+        const magn = magnitude();
+        return new Vec3(magn * magn);
     }
 
     // Return a normalised version of this vector
     normalised() {
-        return new Vec3(this.x * 1/magnitude(), this.y * 1/magnitude(), this.z * 1/magnitude())
+    const mag = magnitude();
+        return new Vec3(this.x / mag, this.y / mag, this.z / mag);
     }
 }
 
