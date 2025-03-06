@@ -47,13 +47,19 @@ class Vec3
     }
 
     // Calculate and return the magnitude of this vector
-    magnitude() {}
+    magnitude() {
+        return new Vec3(Math.sqrt( (this.x * this.x) + (this.y * this.y) + (this.z * this.z)))
+    }
     
     // Calculate and return the magnitude of this vector without the square root
-    magnitudeSquared() {}
+    magnitudeSquared(){
+        return new Vec3(magnitude() * magnitude())
+    }
 
     // Return a normalised version of this vector
-    normalised() {}
+    normalised() {
+        return new Vec3(this.x * 1/magnitude(), this.y * 1/magnitude(), this.z * 1/magnitude())
+    }
 }
 
 // A sphere in 3D space. Has centre, radius and colour all of which are Vec3s
