@@ -43,25 +43,26 @@ class Vec3
     
     // Calculate the dot product of this vector with the other and return the result
     dot(other){
-        return new Vec3(this.x * other.x + this.y * other.y + this.z * other.z);
+        return (this.x * other.x + this.y * other.y + this.z * other.z);
     }
 
     // Calculate and return the magnitude of this vector
     magnitude() {
-        return new Vec3(Math.sqrt( (this.x * this.x) + (this.y * this.y) + (this.z * this.z)));
+        return (Math.sqrt( (this.x * this.x) + (this.y * this.y) + (this.z * this.z)));
     }
     
     // Calculate and return the magnitude of this vector without the square root
     magnitudeSquared(){
-        const magn = magnitude();
-        return new Vec3(magn * magn);
+        const magn = this.magnitude();
+        return (magn * magn);
     }
 
     // Return a normalised version of this vector
     normalised() {
-    const mag = magnitude();
+        const mag = this.magnitude();
         return new Vec3(this.x / mag, this.y / mag, this.z / mag);
     }
+    
 }
 
 // A sphere in 3D space. Has centre, radius and colour all of which are Vec3s
@@ -169,6 +170,17 @@ for (let i = 0; i < imageWidth; i++)
         setPixel(i,j,colour)
     }
 }
+
+//let vec1 = new Vec3(1,1,1)
+//let vec2 = new Vec3(1,1,1)
+//console.log(vec1.add(vec2));
+//console.log(vec1.minus(vec2));
+//console.log(vec1.multiply(vec2))
+//console.log(vec1.scale(2))
+//console.log(vec1.dot(vec2));
+//console.log(vec1.magnitude())
+//console.log(vec1.magnitudeSquared());
+//console.log(vec1.normalised());
 
 </script>
 
