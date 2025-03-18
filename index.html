@@ -80,10 +80,12 @@ class Sphere
     // If two solutions exist return the minus solution
     // If no solutions exist return -1
     rayIntersects(ray)  {
+
         let a = ray.direction.dot(ray.direction);
         let b = 2.0 * ray.origin.minus(this.centre).dot(ray.direction);
         let c = ray.origin.minus(this.centre).dot(ray.origin.minus(this.centre)) - this.radius * this.radius;
-        let discriminant = b * b - 4 * a * c;
+
+        let discriminant = (b * b) - (4 * a * c);
         let t = (-b - Math.sqrt(discriminant)) / (2.0 * a);
 
         if (discriminant < 0) {
@@ -170,6 +172,7 @@ function rayColour(ray)
     if(castResult.t < 0){
         return backgroundColour(ray);
     }
+    let albedo = spheres[cas]
     let diffuse = Math.max(castResult.normal.dot(negLightDirection),0)
     let colour = new Vec3(diffuse,diffuse,diffuse)
     return colour;
