@@ -80,13 +80,20 @@ class Sphere
     // If two solutions exist return the minus solution
     // If no solutions exist return -1
     rayIntersects(ray)  {
-        let discriminant = (ray.direction.y * ray.direction.y) - (4 * ray.direction.x * ray.direction.z);
+        let a = ray.direction.dot(ray.direction);
+        let b = 2.0 * ray.origin.minus(this.centre).dot(ray.direction);
+        let c = ray.origin.minus(this.centre).dot(ray.origin.minus(this.centre)) - this.radius * this.radius;
+        let discriminant = b * b - 4 * a * c;
+        let t = (-b - Math.sqrt(discriminant)) / (2.0 * a);
 
-        if(discriminant > 0){
-            return ((-ray.direction.y) - Math.sqrt(discriminant) / (2 * ray.direction.x))
+        if (discriminant < 0) {
+            return -1;
+        } 
+        else if (t > 0) {
+            return t;
         }
-        else if (discriminant < 0){
-            return -1.0
+        else{
+            return -1;
         }
     }
 }
@@ -163,7 +170,9 @@ function rayColour(ray)
     if(castResult.t < 0){
         return backgroundColour(ray);
     }
-    return castResult.normal; // Red
+    let diffuse = Math.max(castResult.normal.dot(negLightDirection),0)
+    let colour = new Vec3(diffuse,diffuse,diffuse)
+    return colour;
 }
 
 // Sets a pixel at (x, y) in the canvas with an RGB Vec3
