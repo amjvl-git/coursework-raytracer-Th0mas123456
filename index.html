@@ -186,9 +186,24 @@ function rayColour(ray)
     if(castResult.t < 0){
         return backgroundColour(ray);
     }
-    let albedo = spheres[castResult.sphereIndex].colour
-    let diffuse = Math.max(castResult.normal.dot(negLightDirection),0)
-    let colour = albedo.scale(diffuse)
+    let albedo = spheres[castResult.sphereIndex].colour;
+    let diffuse = Math.max(castResult.normal.dot(negLightDirection),0);
+
+    //shadow variables
+    let shadow = new Ray(castResult.position, negLightDirection);
+    let shadowTrace = traceRay(shadow);
+    let shadowEffect;
+
+    //check if a shadow is needed if it is then change the factor so it will effect the colour else have it be 1 so an error isnt caused
+    if(shadowTrace.t > 0){
+        shadowEffect = 0.4;
+    }
+
+    else{
+        shadowEffect = 1.0;
+    }
+
+    let colour = albedo.scale(diffuse * shadowEffect);
     return colour;
 }
 
